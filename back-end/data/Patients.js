@@ -9,7 +9,7 @@ const patients = [
       { name: "Zedex", quantity: 10 },
       { name: "Asthakind", quantity: 4 },
     ],
-    assignedTo: ["Aman Vats", "Albert Sebastian"],
+    assignedTo: ["amanvats", "albertsebastian"],
   },
   {
     name: "Misaal Ambasta",
@@ -21,7 +21,7 @@ const patients = [
       { name: "Azithromycin", quantity: 5 },
       { name: "Amifostine", quantity: 13 },
     ],
-    assignedTo: ["Aman Vats"],
+    assignedTo: ["amanvats"],
   },
   {
     name: "Alok Kothiyal",
@@ -33,7 +33,7 @@ const patients = [
       { name: "Efavirenz", quantity: 5 },
       { name: "Aldesleukin", quantity: 10 },
     ],
-    assignedTo: ["Albert Sebastian"],
+    assignedTo: ["albertsebastian"],
   },
   {
     name: "Omkarnath Parida",
@@ -45,7 +45,7 @@ const patients = [
       { name: "Alfuzosin", quantity: 5 },
       { name: "Alirocumab", quantity: 13 },
     ],
-    assignedTo: ["Aman Vats"],
+    assignedTo: ["amanvats"],
   },
   {
     name: "Manish Kumar",
@@ -57,7 +57,7 @@ const patients = [
       { name: "Allegra Hives", quantity: 25 },
       { name: "Alprazolam", quantity: 33 },
     ],
-    assignedTo: ["Albert Sebastian"],
+    assignedTo: ["albertsebastian"],
   },
   {
     name: "Shubham Kumar",
@@ -69,7 +69,7 @@ const patients = [
       { name: "Allegra Hives", quantity: 15 },
       { name: "Alprazolam", quantity: 13 },
     ],
-    assignedTo: ["Aman Vats", "Albert Sebastian"],
+    assignedTo: ["amanvats", "albertsebastian"],
   },
   {
     name: "Kritika Tripathi",
@@ -81,7 +81,7 @@ const patients = [
       { name: "Allegra Hives", quantity: 15 },
       { name: "Alprazolam", quantity: 13 },
     ],
-    assignedTo: ["Aman Vats", "Albert Sebastian"],
+    assignedTo: ["amanvats", "albertsebastian"],
   },
   {
     name: "Sheelu Krishnatrayi",
@@ -93,7 +93,7 @@ const patients = [
       { name: "Xolair", quantity: 25 },
       { name: "Xylocaine", quantity: 23 },
     ],
-    assignedTo: ["Aman Vats", "Albert Sebastian"],
+    assignedTo: ["amanvats", "albertsebastian"],
   },
   {
     name: "Akash Pathak",
@@ -105,7 +105,7 @@ const patients = [
       { name: "Carbatrol", quantity: 5 },
       { name: "Matnomelines", quantity: 3 },
     ],
-    assignedTo: ["Aman Vats"],
+    assignedTo: ["amanvats"],
   },
   {
     name: "Revanth Raghu",
@@ -117,7 +117,7 @@ const patients = [
       { name: "Jantoven", quantity: 5 },
       { name: "Jenloga", quantity: 3 },
     ],
-    assignedTo: ["Albert Sebastian"],
+    assignedTo: ["albertsebastian"],
   },
   {
     name: "Sai Nihal",
@@ -129,7 +129,7 @@ const patients = [
       { name: "Fanapt", quantity: 15 },
       { name: "Fanatrez", quantity: 13 },
     ],
-    assignedTo: ["Albert Sebastian"],
+    assignedTo: ["albertsebastian"],
   },
   {
     name: "Sai Nihal",
@@ -141,7 +141,7 @@ const patients = [
       { name: "Fanapt", quantity: 15 },
       { name: "Fanatrez", quantity: 13 },
     ],
-    assignedTo: ["Aman Vats", "Albert Sebastian"],
+    assignedTo: ["amanvats", "albertsebastian"],
   },
   {
     name: "Soumitha Bhaskara",
@@ -153,7 +153,7 @@ const patients = [
       { name: "Warfarin", quantity: 15 },
       { name: "Welcol", quantity: 30 },
     ],
-    assignedTo: ["Aman Vats", "Albert Sebastian"],
+    assignedTo: ["amanvats", "albertsebastian"],
   },
   {
     name: "Aayushi Shah",
@@ -165,7 +165,7 @@ const patients = [
       { name: "Uabano", quantity: 25 },
       { name: "Uarezino", quantity: 10 },
     ],
-    assignedTo: ["Aman Vats", "Albert Sebastian"],
+    assignedTo: ["amanvats", "albertsebastian"],
   },
   {
     name: "Kritika Tripathi",
@@ -177,7 +177,7 @@ const patients = [
       { name: "Labetanol", quantity: 16 },
       { name: "Lac-Hydrin", quantity: 13 },
     ],
-    assignedTo: ["Aman Vats", "Albert Sebastian"],
+    assignedTo: ["amanvats", "albertsebastian"],
   },
   {
     name: "Shreyas S",
@@ -189,7 +189,7 @@ const patients = [
       { name: "Kabikinack", quantity: 26 },
       { name: "Kadackla", quantity: 23 },
     ],
-    assignedTo: ["Aman Vats", "Albert Sebastian"],
+    assignedTo: ["amanvats", "albertsebastian"],
   },
   {
     name: "Manideep",
@@ -201,7 +201,7 @@ const patients = [
       { name: "Maalox", quantity: 36 },
       { name: "Mafenide", quantity: 33 },
     ],
-    assignedTo: ["Aman Vats", "Albert Sebastian"],
+    assignedTo: ["amanvats", "albertsebastian"],
   },
 ];
 

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
+import { loginUser } from "./../../redux/auth/actions";
 import {
   Avatar,
   Button,
@@ -50,8 +51,8 @@ const styles = (theme) => ({
     background: "#459EED",
     fontWeight: 600,
     "&:hover": {
-        background: "#1a81dd"
-    }
+      background: "#1a81dd",
+    },
   },
 });
 
@@ -71,10 +72,30 @@ class Login extends Component {
     });
   };
 
-  render() {
-    const { classes } = this.props;
+  handleLogin = () => {
     const { email, password } = this.state;
-    console.log(this.state)
+    const { loginUser } = this.props;
+
+    if (!email || !password) {
+      alert("Enter all the details");
+      return;
+    }
+
+    const payload = { email, password };
+    
+    loginUser(payload);
+  };
+
+  render() {
+    const { classes, user, isAuth } = this.props;
+    const { email, password } = this.state;
+
+    if (isAuth) {
+      let { email: userEmail } = user;
+      const username = userEmail.split("@")[0].toLowerCase();
+      return <Redirect to={`/dashboard/${username}`} />;
+    }
+
     return (
       <Container maxWidth="xs">
         <div className={classes.paper}>
@@ -111,7 +132,7 @@ class Login extends Component {
             className={classes.submit}
             color="primary"
             fullWidth
-            onClick={this.handleSubmit}
+            onClick={this.handleLogin}
             variant="contained"
           >
             Sign In
@@ -129,4 +150,16 @@ class Login extends Component {
   }
 }
 
-export default withStyles(styles)(Login);
+const mapStateToProps = (state) => ({
+  isAuth: state.auth.isAuth,
+  user: state.auth.user,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  loginUser: (payload) => dispatch(loginUser(payload)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(Login));

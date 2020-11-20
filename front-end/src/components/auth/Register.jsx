@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
+import { registerUser } from "./../../redux/auth/actions";
 import {
   Avatar,
   Button,
@@ -72,10 +73,34 @@ class Register extends Component {
     });
   };
 
+  handleRegister = () => {
+    const { name, email, password } = this.state;
+    const { registerUser } = this.props;
+
+    if (!name || !email || !password) {
+      alert("Enter all the details");
+      return;
+    }
+
+    const payload = {
+      name,
+      email,
+      password,
+    };
+
+    registerUser(payload);
+  };
+
   render() {
-    const { classes } = this.props;
+    const { classes, isAuth, user } = this.props;
     const { email, name, password } = this.state;
-    console.log(this.state);
+
+    if (isAuth) {
+      let { email: userEmail } = user;
+      const username = userEmail.split("@")[0].toLowerCase();
+      return <Redirect to={`/dashboard/${username}`} />;
+    }
+
     return (
       <Container maxWidth="xs">
         <div className={classes.paper}>
@@ -122,7 +147,7 @@ class Register extends Component {
             className={classes.submit}
             color="primary"
             fullWidth
-            onClick={this.handleSubmit}
+            onClick={this.handleRegister}
             variant="contained"
           >
             Sign Up
@@ -140,4 +165,16 @@ class Register extends Component {
   }
 }
 
-export default withStyles(styles)(Register);
+const mapStateToProps = (state) => ({
+  isAuth: state.auth.isAuth,
+  user: state.auth.user,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  registerUser: (payload) => dispatch(registerUser(payload)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(Register));
