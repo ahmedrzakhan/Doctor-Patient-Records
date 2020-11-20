@@ -4,12 +4,14 @@ const cors = require("cors");
 const Patient = require("./models/Patient");
 const { patients } = require("./data/patients");
 const patientsRoute = require("./routes/patients");
+const usersRoute = require("./routes/user");
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 app.use("/api/patients", patientsRoute);
+app.use("/api/users", usersRoute);
 
 mongoose.connect(
   process.env.ATLAS_URI,
@@ -34,8 +36,8 @@ db.once("open", async (req, res) => {
   }
 
   Patient.insertMany(patients)
-    .then(() => res.json("Patients added successfully"))
-    .catch((err) => err.status(400).json("Error in adding patients", err));
+    .then((res) => res.json("Patients added successfully"))
+    .catch((err) => res.status(400).json("Error in adding patients", err));
 });
 
 app.listen(5000, () => {
