@@ -50,16 +50,17 @@ const styles = (theme) => ({
     background: "#459EED",
     fontWeight: 600,
     "&:hover": {
-        background: "#1a81dd"
-    }
+      background: "#1a81dd",
+    },
   },
 });
 
-class Login extends Component {
+class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
       email: "",
+      name: "",
       password: "",
     };
   }
@@ -73,19 +74,29 @@ class Login extends Component {
 
   render() {
     const { classes } = this.props;
-    const { email, password } = this.state;
-    console.log(this.state)
+    const { email, name, password } = this.state;
+    console.log(this.state);
     return (
       <Container maxWidth="xs">
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography variant="h5">Sign in</Typography>
+          <Typography variant="h5">Sign Up</Typography>
           <form className={classes.form}>
             <TextField
-              autoComplete="email"
               autoFocus
+              className={classes.textField}
+              fullWidth
+              label="Name"
+              margin="normal"
+              name="name"
+              onChange={this.handleChange}
+              value={name}
+              variant="outlined"
+            />
+            <TextField
+              autoComplete="email"
               className={classes.textField}
               fullWidth
               label="Email Address"
@@ -114,13 +125,13 @@ class Login extends Component {
             onClick={this.handleSubmit}
             variant="contained"
           >
-            Sign In
+            Sign Up
           </Button>
         </div>
         <Grid container justify="center">
           <Grid item>
-            <Link className={classes.linkStyle} to="/register" key="/register">
-              Don't have an account Signup
+            <Link className={classes.linkStyle} to="/" key="/">
+              Have an account Login
             </Link>
           </Grid>
         </Grid>
@@ -129,4 +140,4 @@ class Login extends Component {
   }
 }
 
-export default withStyles(styles)(Login);
+export default withStyles(styles)(Register);
