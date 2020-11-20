@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const {
   getPatients,
+  getPatientById,
   getPatientsByGender,
   getPatientsBySearch,
   sortPatientsByAge,
@@ -11,6 +12,7 @@ const {
 } = require("./../controllers/patients-controller");
 
 router.get("/get-patients", getPatients);
+router.get("/get-patient-by-id", getPatientById);
 router.get("/get-patients-by-gender", getPatientsByGender);
 router.get("/get-patients-by-search", getPatientsBySearch);
 router.get("/sort-patients-by-age", sortPatientsByAge);

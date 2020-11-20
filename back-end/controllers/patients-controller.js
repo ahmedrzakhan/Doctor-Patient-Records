@@ -10,6 +10,14 @@ const getPatients = async (req, res) => {
   res.send(patients);
 };
 
+// Get Patient By Id
+const getPatientById = async (req, res) => {
+  const { id } = req.query;
+  const patient = await Patient.findById(id);
+
+  res.send(patient);
+};
+
 // Filter By Gender
 const getPatientsByGender = async (req, res) => {
   const { gender } = req.query;
@@ -100,6 +108,7 @@ const deletePatient = async (req, res) => {
 
 module.exports = {
   getPatients,
+  getPatientById,
   getPatientsByGender,
   getPatientsBySearch,
   sortPatientsByAge,
