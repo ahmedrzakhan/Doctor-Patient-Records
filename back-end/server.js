@@ -3,10 +3,13 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const Patient = require("./models/Patient");
 const { patients } = require("./data/patients");
+const patientsRoute = require("./routes/patients");
 
 const app = express();
-app.use(express.json());
+
 app.use(cors());
+app.use(express.json());
+app.use("/api/patients", patientsRoute);
 
 mongoose.connect(
   process.env.ATLAS_URI,
