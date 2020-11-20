@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const {
+  getAllPatients,
   getPatients,
   getPatientById,
   getPatientsByGender,
@@ -11,6 +12,7 @@ const {
   deletePatient,
 } = require("./../controllers/patients-controller");
 
+router.get("/get-all-patients", getAllPatients)
 router.get("/get-patients", getPatients);
 router.get("/get-patient-by-id", getPatientById);
 router.get("/get-patients-by-gender", getPatientsByGender);

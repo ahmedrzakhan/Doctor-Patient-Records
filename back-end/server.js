@@ -5,6 +5,7 @@ const Patient = require("./models/Patient");
 const { patients } = require("./data/patients");
 const patientsRoute = require("./routes/patients");
 const usersRoute = require("./routes/user");
+const doctorsRoute = require("./routes/doctors");
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/api/patients", patientsRoute);
 app.use("/api/users", usersRoute);
+app.use("/api/doctors", doctorsRoute);
 
 mongoose.connect(
   process.env.ATLAS_URI,

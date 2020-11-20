@@ -1,5 +1,11 @@
 const Patient = require("./../models/Patient");
 
+const getAllPatients = async (req, res) => {
+  const patients = await Patient.find();
+
+  res.send(patients);
+};
+
 // Get As Per Doctor
 const getPatients = async (req, res) => {
   const { username } = req.query;
@@ -107,6 +113,7 @@ const deletePatient = async (req, res) => {
 };
 
 module.exports = {
+  getAllPatients,
   getPatients,
   getPatientById,
   getPatientsByGender,
