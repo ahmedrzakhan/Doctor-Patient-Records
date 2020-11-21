@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import {
   Card,
   CardActionArea,
@@ -9,8 +10,9 @@ import {
   Button,
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
+import { getAllPatients, deletePatient } from "./../../redux/patients/actions";
 
-const styles = (theme) => ({
+const styles = () => ({
   alignCenter: {
     textAlign: "center",
   },
@@ -41,9 +43,19 @@ const styles = (theme) => ({
 });
 
 class PatientCard extends Component {
+  handleDelete = (id) => {
+    const { deletePatient, getAllPatients, history, location } = this.props;
+    deletePatient(id);
+
+    const { search } = location;
+    const page = search.split("page=")[1];
+    const payload = { page, limit: 6 };
+    getAllPatients(payload);
+  };
+
   render() {
     const { classes, data } = this.props;
-    const { name, image } = data;
+    const { name, image, medicines, _id } = data;
     return (
       <Card raised className={classes.padding}>
         <CardActionArea className={classes.alignCenter}>
@@ -54,13 +66,18 @@ class PatientCard extends Component {
             <Typography noWrap variant="h5">
               {name}
             </Typography>
+            <Typography>Total Medicines: {medicines.length}</Typography>
           </CardContent>
         </CardActionArea>
         <CardActions className={classes.justifyCenter}>
           <Button variant="contained" className={classes.editButton}>
             Edit
           </Button>
-          <Button variant="contained" className={classes.deleteButton}>
+          <Button
+            variant="contained"
+            className={classes.deleteButton}
+            onClick={() => this.handleDelete(_id)}
+          >
             Delete
           </Button>
         </CardActions>
@@ -69,4 +86,12 @@ class PatientCard extends Component {
   }
 }
 
-export default withStyles(styles)(PatientCard);
+const mapDispatchToProps = (dispatch) => ({
+  deletePatient: (payload) => dispatch(deletePatient(payload)),
+  getAllPatients: (payload) => dispatch(getAllPatients(payload)),
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(withStyles(styles)(PatientCard));

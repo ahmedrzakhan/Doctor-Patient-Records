@@ -104,17 +104,6 @@ class Dashboard extends Component {
     history.push("/");
   };
 
-  // handlePageChange = (e, pageNumber) => {
-  //   const { getAllPatients, history, location } = this.props;
-
-  //   history.push(`${location.pathname}?page=${pageNumber}`);
-  //   const payload = { page: pageNumber, limit: 6 };
-
-  //   getAllPatients(payload);
-
-  //   window.scrollTo(0, 0);
-  // };
-
   componentDidMount() {
     const { getAllPatients, location } = this.props;
     const page = location.search.split("page=")[1];

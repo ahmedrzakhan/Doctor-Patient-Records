@@ -32,7 +32,7 @@ class RenderCards extends Component {
     window.scrollTo(0, 0);
   };
   render() {
-    const { data: patients, totalPatients, classes } = this.props;
+    const { data: patients, totalPatients, classes, history, location } = this.props;
     const numberOfPages = Math.ceil(totalPatients / 6);
 
     return (
@@ -45,7 +45,7 @@ class RenderCards extends Component {
         >
           {patients.map((patient) => (
             <Grid item key={patient._id} xs={12} sm={8} md={6} lg={4}>
-              <PatientCard data={patient} />
+              <PatientCard data={patient} history={history} location={location} />
             </Grid>
           ))}
         </Grid>
@@ -61,9 +61,8 @@ class RenderCards extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    getAllPatients: (payload) => dispatch(getAllPatients(payload)),
-  });
-  
+  getAllPatients: (payload) => dispatch(getAllPatients(payload)),
+});
 
 export default connect(
   null,
