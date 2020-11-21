@@ -82,7 +82,7 @@ class Login extends Component {
     }
 
     const payload = { email, password };
-    
+
     loginUser(payload);
   };
 
@@ -93,7 +93,7 @@ class Login extends Component {
     if (isAuth) {
       let { email: userEmail } = user;
       const username = userEmail.split("@")[0].toLowerCase();
-      return <Redirect to={`/dashboard/${username}`} />;
+      return <Redirect to={`/dashboard/${username}?page=1`} />;
     }
 
     return (

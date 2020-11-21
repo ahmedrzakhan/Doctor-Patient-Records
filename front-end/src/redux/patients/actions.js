@@ -20,12 +20,13 @@ export const getAllPatientsFailure = (payload) => ({
   payload,
 });
 
-export const getAllPatients = () => async (dispatch) => {
-  dispatch(getAllPatientsRequest());
-
+export const getAllPatients = (payload) => async (dispatch) => {
+  console.log(payload);
+  dispatch(getAllPatientsRequest(payload));
+  const { page, limit } = payload;
   const config = {
     method: "get",
-    url: "http://localhost:5000/api/patients/get-all-patients",
+    url: `http://localhost:5000/api/patients/get-all-patients?page=${page}&limit=${limit}`,
   };
 
   try {

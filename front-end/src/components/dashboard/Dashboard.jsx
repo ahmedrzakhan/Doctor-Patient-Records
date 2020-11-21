@@ -5,14 +5,13 @@ import { Link } from "react-router-dom";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import { saveData } from "./../../localStorage/localStorage";
 import { getAllPatients } from "./../../redux/patients/actions";
-import PatientCard from "../patient/PatientCard";
+import RenderCards from "./RenderCards";
 import { withStyles } from "@material-ui/core/styles";
 import {
   AppBar,
   Button,
   Drawer,
   Divider,
-  Grid,
   List,
   ListItem,
   ListItemIcon,
@@ -47,17 +46,7 @@ const styles = (theme) => ({
     color: "#459EED",
     textDecoration: "none",
   },
-  gridStyle: {
-    maxWidth: "100%",
-    margin: "auto",
 
-    [theme.breakpoints.down("md")]: {
-      padding: "30px 5px 30px 5px",
-    },
-    [theme.breakpoints.up("md")]: {
-      padding: "50px 50px 30px 50px",
-    },
-  },
   headerStyle: {
     fontWeight: 600,
     fontSize: 18,
@@ -82,16 +71,9 @@ class Dashboard extends Component {
     };
   }
 
-  getPatients = async () => {
-    const { getAllPatients } = this.props;
-
-    getAllPatients();
-  };
-
   checkAuthority = () => {
     const { doctors } = this.state;
     const { username } = this.props.match.params;
-    getAllPatients();
     const authorized = doctors.find((doctor) => doctor.username === username);
 
     if (!authorized) {
@@ -122,17 +104,36 @@ class Dashboard extends Component {
     history.push("/");
   };
 
+  // handlePageChange = (e, pageNumber) => {
+  //   const { getAllPatients, history, location } = this.props;
+
+  //   history.push(`${location.pathname}?page=${pageNumber}`);
+  //   const payload = { page: pageNumber, limit: 6 };
+
+  //   getAllPatients(payload);
+
+  //   window.scrollTo(0, 0);
+  // };
+
   componentDidMount() {
-    this.getPatients();
-    this.getDoctors();
+    const { getAllPatients, location } = this.props;
+    const page = location.search.split("page=")[1];
+
+    const payload = { page: page, limit: 6 };
+
+    getAllPatients(payload);
     this.checkAuthority();
+    this.getDoctors();
   }
 
   render() {
-    const { classes, patients } = this.props;
+    const { classes, patients, totalPatients, history, location } = this.props;
+    const { username } = this.props.match.params;
+
     if (patients.length === 0) {
       return null;
     }
+
     return (
       <>
         <AppBar position="fixed" className={classes.appBar}>
@@ -172,43 +173,28 @@ class Dashboard extends Component {
           </div>
           <Divider />
           <List>
-            {["Dashboard"].map((text, index) => (
-              <Link
-                to={text.toLowerCase()}
-                key={text.toLowerCase()}
-                className={classes.linkStyle}
-              >
-                <ListItem button key={text}>
-                  <ListItemIcon>
-                    <DashboardIcon className={classes.iconStyle} />
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItem>
-              </Link>
-            ))}
+            <Link
+              to={`/dashboard/${username}?page=1`}
+              key={`/dashboard/${username}?page=1`}
+              className={classes.linkStyle}
+            >
+              <ListItem button key={username}>
+                <ListItemIcon>
+                  <DashboardIcon className={classes.iconStyle} />
+                </ListItemIcon>
+                <ListItemText primary="Dashboard" />
+              </ListItem>
+            </Link>
           </List>
           <Divider />
         </Drawer>
         <main className={classes.content}>
-          {/* <AddStudent addNewStudent={this.addNewStudent} /> */}
-          <Grid
-            container
-            spacing={3}
-            className={classes.gridStyle}
-            justify="center"
-          >
-            {patients.map((patient) => (
-              <Grid item key={patient._id} xs={12} sm={8} md={6} lg={4}>
-                <PatientCard data={patient} />
-              </Grid>
-            ))}
-          </Grid>
-          <Grid container justify="center" className={classes.paginationStyle}>
-            {/* <Pagination
-              count={numberOfPages}
-              onChange={(e, value) => this.handlePageChange(e, value)}
-            /> */}
-          </Grid>
+          <RenderCards
+            data={patients}
+            totalPatients={totalPatients}
+            history={history}
+            location={location}
+          />
         </main>
       </>
     );
@@ -217,10 +203,11 @@ class Dashboard extends Component {
 
 const mapStateToProps = (state) => ({
   patients: state.patients.patients,
+  totalPatients: state.patients.totalPatients,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getAllPatients: () => dispatch(getAllPatients()),
+  getAllPatients: (payload) => dispatch(getAllPatients(payload)),
 });
 
 export default connect(

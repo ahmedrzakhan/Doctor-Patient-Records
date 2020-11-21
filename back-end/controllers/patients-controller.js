@@ -1,9 +1,7 @@
 const Patient = require("./../models/Patient");
 
 const getAllPatients = async (req, res) => {
-  const patients = await Patient.find();
-
-  res.send(patients);
+  res.send(res.pagination);
 };
 
 // Get As Per Doctor

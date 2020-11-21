@@ -37,6 +37,7 @@ export const registerUser = (payload) => async (dispatch) => {
 
   try {
     const response = await axios(config);
+    console.log(response.data);
     dispatch(registerUserSuccess(response.data));
   } catch (err) {
     dispatch(registerUserFailure(err));

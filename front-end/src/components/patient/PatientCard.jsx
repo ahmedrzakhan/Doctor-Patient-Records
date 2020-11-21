@@ -26,13 +26,18 @@ const styles = (theme) => ({
     justifyContent: "center",
   },
   editButton: {
-      background: "#E2E1DD",
-      color: "#459EED"
+    background: "#E2E1DD",
+    color: "#459EED",
+    "&:hover": {
+      background: "#459EED",
+      color: "#fff",
+    },
   },
   deleteButton: {
     background: "#000",
-    color: "#FFFFFF"
-  }
+    color: "#FFFFFF",
+    "&:hover": { background: "#F64028" },
+  },
 });
 
 class PatientCard extends Component {
